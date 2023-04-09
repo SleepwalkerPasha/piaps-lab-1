@@ -61,21 +61,22 @@ class User {
         string $password) 
         : void {
             $validator = Validation::createValidator();
-            $errors = $validator->validate([
-                'id' => $id,
-                'name' => $name,
-                'email' => $email,
-                'password' => $password,
-            ],
-            new Assert\Collection(
-            [
-                'id' => new Assert\Positive(),
-                'name' => new Assert\Length(max:50, min:2),
-                'email' => new Assert\Email(),
-                'password' => new Assert\Length(max:50, min:2),
-            ]
-            )
-        );
+            $errors = $validator->validate(
+                [
+                    'id' => $id,
+                    'name' => $name,
+                    'email' => $email,
+                    'password' => $password,
+                ],
+                new Assert\Collection(
+                [
+                    'id' => new Assert\Positive(),
+                    'name' => new Assert\Length(max:50, min:2),
+                    'email' => new Assert\Email(),
+                    'password' => new Assert\Length(max:50, min:2),
+                ]
+                )
+            );
         if (count($errors) > 0) {
             throw new InvalidArgumentException((string) $errors);
         }
