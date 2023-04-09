@@ -6,16 +6,16 @@ use DateTime;
 
 class Comment{
 
-    private $created_at;
+    private DateTime $createdAt;
 
-    private $user;
+    private User $user;
 
-    private $message;
+    private string $message;
 
-    public function __construct($user, $message) {
+    public function __construct(User $user, string $message) {
         $this->user = $user;
         $this->message = $message;
-        $this->created_at = new DateTime();
+        $this->createdAt = new DateTime();
     }
 
     public function getUser(): User
@@ -30,6 +30,6 @@ class Comment{
 
     public function getCreatedAt(): DateTime
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 }
