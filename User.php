@@ -10,17 +10,17 @@ use Symfony\Component\Validator\Validation;
 
 class User {
     
-    private $createdAt;
+    private DateTime $createdAt;
     
-    private $id;
+    private int $id;
 
-    private $name;
+    private string $name;
 
-    private $email;
+    private string $email;
 
-    private $password;
+    private string $password;
 
-    public function __construct($id, $name, $email, $password) {
+    public function __construct(int $id, string $name, string $email, string $password) {
         $this->validateArgs($id, $name, $email, $password);
         $this->id = $id;
         $this->name = $name;
@@ -54,18 +54,20 @@ class User {
         return $this->createdAt;
     }
 
-    private function validateArgs(int $id,
-    string $name,
-    string $email,
-    string $password) : void {
-        $validator = Validation::createValidator();
-        $errors = $validator->validate([
-            'id' => $id,
-            'name' => $name,
-            'email' => $email,
-            'password' => $password,
-        ],
-        new Assert\Collection(
+    private function validateArgs(
+        int $id,
+        string $name,
+        string $email,
+        string $password) 
+        : void {
+            $validator = Validation::createValidator();
+            $errors = $validator->validate([
+                'id' => $id,
+                'name' => $name,
+                'email' => $email,
+                'password' => $password,
+            ],
+            new Assert\Collection(
             [
                 'id' => new Assert\Positive(),
                 'name' => new Assert\Length(max:50, min:2),
